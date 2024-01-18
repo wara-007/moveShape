@@ -1,0 +1,174 @@
+$primary-color: #007bff;
+$primary-color-bg: #ffa200;
+$primary-color-bg2: #6eda78;
+body{
+    background: linear-gradient(to right, $primary-color-bg, $primary-color-bg2);
+}
+.container {
+    padding: 40px;
+    font-size: 20px
+}
+
+.boxSelect {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.content {
+    .ant-card {
+        margin: auto;
+    }
+}
+
+
+// 
+
+//Colors - Not needed for demo
+$r: #c03;
+$g: #429032;
+$b: #2963BD;
+$y: #c90;
+
+//Shapes 
+@mixin rectangle($width, $height, $color) {
+    width: $width;
+    height: $height;
+    background: $color;
+}
+
+@mixin parallelogram($width, $height, $skew, $color) {
+    @include rectangle($width, $height, $color);
+    background: $color;
+    transform: skew($skew);
+}
+
+@mixin square($size, $color) {
+    @include rectangle($size, $size, $color);
+}
+
+@mixin circle($size, $color) {
+    @include square($size, $color);
+    border-radius: $size / 2;
+}
+
+@mixin oval($width, $height, $color) {
+    width: $width;
+    height: $height;
+    border-radius: #{$width} / #{$height};
+    background: $color;
+}
+
+@mixin triangle($direction, $size, $color) {
+    width: 0;
+    height: 0;
+
+    @if $direction =='up' {
+        border-right: $size solid transparent;
+        border-bottom: $size * 1.732 solid $color;
+        border-left: $size solid transparent;
+    }
+
+    @else if $direction =='down' {
+        border-top: $size * 1.732 solid $color;
+        border-right: $size solid transparent;
+        border-left: $size solid transparent;
+    }
+
+    @else if $direction =='left' {
+        border-top: $size solid transparent;
+        border-right: $size * 1.732 solid $color;
+        border-bottom: $size solid transparent;
+    }
+
+    @else if $direction =='right' {
+        border-top: $size solid transparent;
+        border-bottom: $size solid transparent;
+        border-left: $size * 1.732 solid $color;
+    }
+}
+
+
+
+@mixin trapezoid($width, $color) {
+    width: $width;
+    height: 0;
+    border-right: $width / 2 solid transparent;
+    border-bottom: $width solid $color;
+    border-left: $width / 2 solid transparent;
+    box-sizing: content-box;
+}
+
+//
+.square {
+    @include parallelogram(100px, 100px, 0deg, $r );
+}
+
+.parallelogram {
+    @include parallelogram(100px, 70px, 10deg, $r );
+}
+
+.circle {
+    @include oval(100px, 100px, $g);
+
+}
+
+.oval {
+    @include oval(100px, 50px, $g);
+}
+
+.rectangle {
+    @include parallelogram(150px, 100px, 0deg, $r );
+}
+
+.trapezoid {
+    @include trapezoid(80px, $b );
+}
+
+.up-triangle {
+    @include triangle(up, 60px, $b );
+}
+
+.down-triangle {
+    @include triangle(down, 60px, $y );
+}
+
+.left-triangle {
+    @include triangle(left, 60px, $r );
+}
+
+.right-triangle {
+    @include triangle(right, 60px, $g );
+}
+
+.ctnr {
+    padding: 10px 20px 20px;
+    margin: 10px;
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: inset 0 0 0 2px rgba(black, .05), 1px 1px 5px rgba(black, .2);
+    position: relative;
+    display: flex;
+
+    &--hex-adjust {
+        @extend .ctnr;
+        padding: 45px 50px 20px;
+    }
+
+    div {
+        margin: auto;
+    }
+}
+
+.flex-ctnr {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+
+
+.row {
+    display: flex;
+}
